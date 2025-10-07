@@ -12,10 +12,10 @@ public class BenchmarkRunner {
         int[] sizes = {100, 1000, 10000, 100000};
         String[] cases = {"random", "sorted", "reversed", "nearly"};
 
-        for (String c : cases) {
-            try (FileWriter writer = new FileWriter("docs/performance-plots/selectionsort_" + c + ".csv")) {
-                writer.write("n,time(ms),comparisons,swaps\n");
+        try (FileWriter writer = new FileWriter("docs/performance-plots/selectionsort_results.csv")) {
+            writer.write("case,n,time(ms),comparisons,swaps\n");
 
+            for (String c : cases) {
                 for (int n : sizes) {
                     int[] arr = generateArray(n, c);
                     PerformanceTracker tracker = new PerformanceTracker();
@@ -25,7 +25,8 @@ public class BenchmarkRunner {
                     sorter.sort(arr);
                     long end = System.currentTimeMillis();
 
-                    writer.write(n + "," + (end - start) + "," + tracker.getComparisons() + "," + tracker.getSwaps() + "\n");
+                    writer.write(c + "," + n + "," + (end - start) + "," +
+                            tracker.getComparisons() + "," + tracker.getSwaps() + "\n");
                 }
             }
         }

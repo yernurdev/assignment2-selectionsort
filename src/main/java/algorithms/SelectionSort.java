@@ -25,14 +25,10 @@ public class SelectionSort {
                 }
             }
 
-            if (swapped) {
-                tracker.incrementSwaps();
-                int temp = arr[minIdx];
-                arr[minIdx] = arr[i];
-                arr[i] = temp;
-            } else {
-                break; // массив уже отсортирован
-            }
+            tracker.incrementSwaps();
+            int temp = arr[minIdx];
+            arr[minIdx] = arr[i];
+            arr[i] = temp;
         }
     }
 }
